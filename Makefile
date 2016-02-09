@@ -2,7 +2,7 @@
 ### Hooks for the editor to set the default target
 current: target
 
-target pngtarget pdftarget vtarget acrtarget: T2.NIH2.hybrid.Rout 
+target pngtarget pdftarget vtarget acrtarget: liberia.narrhy.compare.Rout 
 
 ##################################################################
 
@@ -10,7 +10,7 @@ target pngtarget pdftarget vtarget acrtarget: T2.NIH2.hybrid.Rout
 
 Sources = Makefile .gitignore README.md stuff.mk LICENSE.md
 include stuff.mk
-# include $(ms)/perl.def
+include $(ms)/perl.def
 
 ##################################################################
 
@@ -38,12 +38,49 @@ hybrid%.autobug: hybrid.bugtmp lagchain.pl
 
 ##################################################################
 
-## Do a hybrid fit
+## Do a hybrid fit DEPRECATED ... read separately from fitting
+## Also, BROKEN
 
-T2.NIH2.hybrid.Rout: hybrid.bugtmp hybrid.R
+# hidden in hybrid.mk
 
-%.hybrid.Rout: hybrid.params.Rout data/%.cc.csv hybrid5.autobug hybrid.R
+##################################################################
+
+data/liberia.cc.csv: $(gitroot)/WA_Ebola_Outbreak/liberia150429.npc.Rout.csv
+	$(ln)
+
+liberia.data.Rout: data/liberia.cc.csv data.R
 	$(run-R)
+
+liberia.hybrid.Rout: hybrid.R
+%.hybrid.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout hybrid5.autobug hybrid.R
+	$(run-R)
+
+%.narrhy.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout narrow.params.Rout hybrid5.autobug hybrid.R
+	$(run-R)
+
+## Get estimates from posterior chains
+
+liberia.hybrid.est.Rout: est.R
+.PRECIOUS: %.est.Rout
+%.est.Rout: %.Rout est.R
+	$(run-R)
+
+##################################################################
+
+### Make projections and compare with reality
+
+liberia.narrhy.compare.Rout: compare.R
+
+%.compare.Rout: %.est.Rout forecastPlot.Rout compare.R
+	$(run-R)
+
+%.data.Rout: data/%.cc.csv data.R
+	$(run-R)
+
+##################################################################
+
+
+
 
 ### Makestuff
 
@@ -62,7 +99,7 @@ T2.NIH2.hybrid.Rout: hybrid.bugtmp hybrid.R
 
 crib = $(gitroot)/Latent_incidence_fitting
 
-.PRECIOUS: %.R %.pl %.bugtmp
-%.R %.pl %.bugtmp:
-	/bin/cp -f $(crib)/$@ .
+# .PRECIOUS: %.R %.pl %.bugtmp
+# %.R %.pl %.bugtmp:
+	# /bin/cp -f $(crib)/$@ .
 

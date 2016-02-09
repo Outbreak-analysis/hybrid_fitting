@@ -1,18 +1,15 @@
-# require("R2jags")
+require("R2jags")
 
-datf <- grep("csv$", input_files, value=TRUE)
-print(datf)
-
-quit()
-obs <- read.csv(input_files[[1]])[[2]]
-summary(obs)
+# Parse the lag out of the model file name (clunky)
+bugf <- grep("bug$", input_files, value=TRUE)
+lag <- as.numeric(gsub("[A-Za-z_.]*", "", bugf))
 
 set.seed(seed)
 
-if(forecast>0) obs <- c(obs, rep(NA, forecast))
-
-# Parse the lag out of the model file name (clunky)
-lag <- as.numeric(gsub("[A-Za-z_.]*", "", input_files[1]))
+fitlength <- ifelse(exists("fitlength"), fitlength, length(allobs))
+projlength <- ifelse(exists("extend"), length(allobs)+extend, length(allobs))
+obs <- rep(NA, projlength)
+obs[1:fitlength] <- allobs[1:fitlength]
 
 data <- list (
 	obs = obs
@@ -53,7 +50,7 @@ inits <- lapply (mult, function(m){
 
 print(inits)
 
-sim <- jags(model.file=input_files[[1]],
+sim <- jags(model.file=bugf,
 	data=data, inits=inits, 
 	parameters = c("ker", "R0", "gen"
 		, "repMean"
