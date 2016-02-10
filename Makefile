@@ -2,7 +2,7 @@
 ### Hooks for the editor to set the default target
 current: target
 
-target pngtarget pdftarget vtarget acrtarget: liberia.narrhy.compare.Rout 
+target pngtarget pdftarget vtarget acrtarget: sierraLeone.longh.compare.Rout.pdf
 
 ##################################################################
 
@@ -45,22 +45,30 @@ hybrid%.autobug: hybrid.bugtmp lagchain.pl
 
 ##################################################################
 
-data/liberia.cc.csv: $(gitroot)/WA_Ebola_Outbreak/liberia150429.npc.Rout.csv
+data/liberia.cc.csv: $(gitroot)/WA_Ebola_Outbreak/liberia.npc.Rout.csv
+	$(lnf)
+
+data/guinea.cc.csv: $(gitroot)/WA_Ebola_Outbreak/guinea.npc.Rout.csv
 	$(ln)
 
-liberia.data.Rout: data/liberia.cc.csv data.R
+data/sierraLeone.cc.csv: $(gitroot)/WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
+	$(ln)
+
+%.data.Rout: data/%.cc.csv data.R
 	$(run-R)
 
-liberia.hybrid.Rout: hybrid.R
 %.hybrid.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout hybrid5.autobug hybrid.R
 	$(run-R)
+
+%.longh.Rout: %.data.Rout hybrid.params.Rout %.longh.params.Rout hybrid5.autobug hybrid.R
+	$(run-R)
+
 
 %.narrhy.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout narrow.params.Rout hybrid5.autobug hybrid.R
 	$(run-R)
 
 ## Get estimates from posterior chains
 
-liberia.hybrid.est.Rout: est.R
 .PRECIOUS: %.est.Rout
 %.est.Rout: %.Rout est.R
 	$(run-R)
@@ -69,7 +77,7 @@ liberia.hybrid.est.Rout: est.R
 
 ### Make projections and compare with reality
 
-liberia.narrhy.compare.Rout: compare.R
+xx.narrhy.compare.Rout: compare.R
 
 %.compare.Rout: %.est.Rout forecastPlot.Rout compare.R
 	$(run-R)
