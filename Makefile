@@ -10,7 +10,7 @@ target pngtarget pdftarget vtarget acrtarget: sierraLeone.longh.compare.Rout.pdf
 
 Sources = Makefile .gitignore README.md stuff.mk LICENSE.md
 include stuff.mk
-include $(ms)/perl.def
+-include $(ms)/perl.def
 
 ##################################################################
 
@@ -38,21 +38,14 @@ hybrid%.autobug: hybrid.bugtmp lagchain.pl
 
 ##################################################################
 
-## Do a hybrid fit DEPRECATED ... read separately from fitting
-## Also, BROKEN
-
-# hidden in hybrid.mk
-
-##################################################################
-
 data/liberia.cc.csv: $(gitroot)/WA_Ebola_Outbreak/liberia.npc.Rout.csv
 	$(lnf)
 
 data/guinea.cc.csv: $(gitroot)/WA_Ebola_Outbreak/guinea.npc.Rout.csv
-	$(ln)
+	$(lnf)
 
 data/sierraLeone.cc.csv: $(gitroot)/WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
-	$(ln)
+	$(lnf)
 
 %.data.Rout: data/%.cc.csv data.R
 	$(run-R)
@@ -62,7 +55,6 @@ data/sierraLeone.cc.csv: $(gitroot)/WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
 
 %.longh.Rout: %.data.Rout hybrid.params.Rout %.longh.params.Rout hybrid5.autobug hybrid.R
 	$(run-R)
-
 
 %.narrhy.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout narrow.params.Rout hybrid5.autobug hybrid.R
 	$(run-R)
@@ -77,8 +69,6 @@ data/sierraLeone.cc.csv: $(gitroot)/WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
 
 ### Make projections and compare with reality
 
-xx.narrhy.compare.Rout: compare.R
-
 %.compare.Rout: %.est.Rout forecastPlot.Rout compare.R
 	$(run-R)
 
@@ -87,27 +77,8 @@ xx.narrhy.compare.Rout: compare.R
 
 ##################################################################
 
-
-
-
-### Makestuff
-
-## Change this name to download a new version of the makestuff directory
-# Makefile: start.makestuff
-
 -include $(ms)/git.mk
 -include $(ms)/visual.mk
 
 -include $(ms)/wrapR.mk
 # -include $(ms)/oldlatex.mk
-
-##################################################################
-
-# Cribbing!!!!!!
-
-crib = $(gitroot)/Latent_incidence_fitting
-
-# .PRECIOUS: %.R %.pl %.bugtmp
-# %.R %.pl %.bugtmp:
-	# /bin/cp -f $(crib)/$@ .
-
