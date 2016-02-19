@@ -22,7 +22,7 @@ data:
 
 subdirs += data
 $(gitroot)/WA_Ebola_Outbreak:
-	cd $(gitroot) && git clone $(oarepo)/$(notdir $(ms)).git
+	cd $(gitroot) && git clone $(oarepo)/WA_Ebola_Outbreak.git
 	ln -fs $(In) $@
 
 $(gitroot)/WA_Ebola_Outbreak/%:
