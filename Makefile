@@ -47,8 +47,11 @@ data/guinea.cc.csv: $(gitroot)/WA_Ebola_Outbreak/guinea.npc.Rout.csv
 data/sierraLeone.cc.csv: $(gitroot)/WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
 	$(lnf)
 
-%.data.Rout: data/%.cc.csv data.R
-	$(run-R)
+
+sierraLeone.data.Rout: sierraLeone.cc.csv data.R
+		       $(run-R)
+#%.data.Rout: data/%.cc.csv data.R
+#	$(run-R)
 
 %.hybrid.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout hybrid5.autobug hybrid.R
 	$(run-R)
