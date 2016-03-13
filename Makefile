@@ -2,7 +2,7 @@
 ### Hooks for the editor to set the default target
 current: target
 
-target pngtarget pdftarget vtarget acrtarget: sierraLeone.longh.compare.Rout.pdf
+target pngtarget pdftarget vtarget acrtarget: sierraLeone.hybridstan.Rout
 
 ##################################################################
 
@@ -55,6 +55,12 @@ sierraLeone.data.Rout: sierraLeone.cc.csv data.R
 
 %.hybrid.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout hybrid5.autobug hybrid.R
 	$(run-R)
+
+sierraLeone.hybridstan.Rout: sierraLeone.data.Rout sierraLeone.hybrid.params.Rout hybrid.params.Rout hybrid.stan hybridstan.R
+			     $(run-R)
+
+#%.hybridstan.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout hybrid.stan hybridstan.R
+#		   $(run-R)
 
 %.longh.Rout: %.data.Rout hybrid.params.Rout %.longh.params.Rout hybrid5.autobug hybrid.R
 	$(run-R)
