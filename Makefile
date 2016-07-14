@@ -2,7 +2,7 @@
 ### Hooks for the editor to set the default target
 current: target
 
-target pngtarget pdftarget vtarget acrtarget: sierraLeone.hybridstan.Rout
+target pngtarget pdftarget vtarget acrtarget: sierraLeone.data.Rout 
 
 ##################################################################
 
@@ -47,9 +47,9 @@ data/guinea.cc.csv: $(gitroot)/WA_Ebola_Outbreak/guinea.npc.Rout.csv
 data/sierraLeone.cc.csv: $(gitroot)/WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
 	$(lnf)
 
+sierraLeone.data.Rout: data/sierraLeone.cc.csv data.R
+	$(run-R)
 
-sierraLeone.data.Rout: sierraLeone.cc.csv data.R
-		       $(run-R)
 #%.data.Rout: data/%.cc.csv data.R
 #	$(run-R)
 
@@ -57,7 +57,7 @@ sierraLeone.data.Rout: sierraLeone.cc.csv data.R
 	$(run-R)
 
 sierraLeone.hybridstan.Rout: sierraLeone.data.Rout sierraLeone.hybrid.params.Rout hybrid.params.Rout hybrid.stan hybridstan.R
-			     $(run-R)
+	$(run-R)
 
 #%.hybridstan.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout hybrid.stan hybridstan.R
 #		   $(run-R)
