@@ -1,5 +1,6 @@
-# hybrid
-### Hooks for the editor to set the default target
+
+## A probably-deprecated directory where I applied some of my hybrid stuff from the Ebola challenge to real Ebola data
+
 current: target
 
 target pngtarget pdftarget vtarget acrtarget: sierraLeone.data.Rout 
