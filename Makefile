@@ -1,16 +1,20 @@
 
 ## A probably-deprecated directory where I applied some of my hybrid stuff from the Ebola challenge to real Ebola data
+## Still using at least for MMED slides
 
 current: target
-
-target pngtarget pdftarget vtarget acrtarget: sierraLeone.data.Rout 
+target = Makefile
+-include target.mk
+target: $(target)
 
 ##################################################################
 
+sierraLeone.hybrid.compare.Rout-3.pdf:
+
 # make files
 
-Sources = Makefile .gitignore README.md stuff.mk LICENSE.md
-include stuff.mk
+Sources = Makefile .gitignore README.md sub.mk LICENSE.md
+include sub.mk
 -include $(ms)/perl.def
 
 ##################################################################
@@ -39,14 +43,14 @@ hybrid%.autobug: hybrid.bugtmp lagchain.pl
 
 ##################################################################
 
-data/liberia.cc.csv: $(gitroot)/WA_Ebola_Outbreak/liberia.npc.Rout.csv
+data/liberia.cc.csv: WA_Ebola_Outbreak/liberia.npc.Rout.csv
 	$(lnf)
 
-data/guinea.cc.csv: $(gitroot)/WA_Ebola_Outbreak/guinea.npc.Rout.csv
+data/guinea.cc.csv: WA_Ebola_Outbreak/guinea.npc.Rout.csv
 	$(lnf)
 
-data/sierraLeone.cc.csv: $(gitroot)/WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
-	$(lnf)
+data/sierraLeone.cc.csv: data/%: WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
+	cd data && ln ../$< $*
 
 sierraLeone.data.Rout: data/sierraLeone.cc.csv data.R
 	$(run-R)
@@ -88,4 +92,7 @@ sierraLeone.hybridstan.Rout: sierraLeone.data.Rout sierraLeone.hybrid.params.Rou
 -include $(ms)/visual.mk
 
 -include $(ms)/wrapR.mk
+-include $(ms)/modules.mk
+
+
 # -include $(ms)/oldlatex.mk

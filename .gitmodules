@@ -1,0 +1,3 @@
+[submodule "WA_Ebola_Outbreak"]
+	path = WA_Ebola_Outbreak
+	url = git@github.com:Outbreak-analysis/WA_Ebola_Outbreak.git
