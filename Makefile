@@ -50,7 +50,7 @@ data/guinea.cc.csv: WA_Ebola_Outbreak/guinea.npc.Rout.csv
 	$(lnf)
 
 data/sierraLeone.cc.csv: data/%: WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
-	cd data && ln ../$< $*
+	$(lnf)
 
 sierraLeone.data.Rout: data/sierraLeone.cc.csv data.R
 	$(run-R)
