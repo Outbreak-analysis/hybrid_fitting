@@ -2,15 +2,14 @@
 ## A probably-deprecated directory where I applied some of my hybrid stuff from the Ebola challenge to real Ebola data
 
 current: target
-
-target pngtarget pdftarget vtarget acrtarget: sierraLeone.data.Rout 
+-include target.mk
 
 ##################################################################
 
 # make files
 
-Sources = Makefile .gitignore README.md stuff.mk LICENSE.md
-include stuff.mk
+Sources = Makefile .gitignore README.md sub.mk LICENSE.md
+include sub.mk
 -include $(ms)/perl.def
 
 ##################################################################
