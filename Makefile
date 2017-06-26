@@ -17,6 +17,8 @@ Sources = Makefile .gitignore README.md sub.mk LICENSE.md
 include sub.mk
 -include $(ms)/perl.def
 
+Sources += makestuff/ WA_Ebola_Outbreak/
+
 ##################################################################
 
 # Discussion
