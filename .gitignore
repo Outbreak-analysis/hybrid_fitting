@@ -1,5 +1,8 @@
-commit.txt
+commit.time
 .*.sw*
+
+*.autobug
+*.cc.csv
 
 *.pdf
 
