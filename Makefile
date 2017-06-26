@@ -43,16 +43,16 @@ hybrid%.autobug: hybrid.bugtmp lagchain.pl
 
 ##################################################################
 
-data/liberia.cc.csv: WA_Ebola_Outbreak/liberia.npc.Rout.csv
+liberia.cc.csv: WA_Ebola_Outbreak/liberia.npc.Rout.csv
 	$(lnf)
 
-data/guinea.cc.csv: WA_Ebola_Outbreak/guinea.npc.Rout.csv
+guinea.cc.csv: WA_Ebola_Outbreak/guinea.npc.Rout.csv
 	$(lnf)
 
-data/sierraLeone.cc.csv: data/%: WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
+sierraLeone.cc.csv: WA_Ebola_Outbreak/sierraLeone.npc.Rout.csv
 	$(lnf)
 
-sierraLeone.data.Rout: data/sierraLeone.cc.csv data.R
+sierraLeone.data.Rout: sierraLeone.cc.csv data.R
 	$(run-R)
 
 %.hybrid.Rout: %.data.Rout %.hybrid.params.Rout hybrid.params.Rout hybrid5.autobug hybrid.R
@@ -83,7 +83,7 @@ sierraLeone.hybridstan.Rout: sierraLeone.data.Rout sierraLeone.hybrid.params.Rou
 %.compare.Rout: %.est.Rout forecastPlot.Rout compare.R
 	$(run-R)
 
-%.data.Rout: data/%.cc.csv data.R
+%.data.Rout: %.cc.csv data.R
 	$(run-R)
 
 ##################################################################
@@ -93,6 +93,5 @@ sierraLeone.hybridstan.Rout: sierraLeone.data.Rout sierraLeone.hybrid.params.Rou
 
 -include $(ms)/wrapR.mk
 -include $(ms)/modules.mk
-
 
 # -include $(ms)/oldlatex.mk

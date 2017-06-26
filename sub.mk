@@ -6,7 +6,7 @@ Sources += $(ms)
 
 Makefile: $(ms)
 $(ms):
-	git submodule add git@github.com:dushoff/$@.git
+	git submodule add https://github.com/dushoff/makestuff.git
 
 $(ms)/%.mk: 
 	git submodule init $(ms) 

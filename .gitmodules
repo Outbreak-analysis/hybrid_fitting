@@ -1,3 +1,6 @@
 [submodule "WA_Ebola_Outbreak"]
 	path = WA_Ebola_Outbreak
 	url = git@github.com:Outbreak-analysis/WA_Ebola_Outbreak.git
+[submodule "makestuff"]
+	path = makestuff
+	url = https://github.com/dushoff/makestuff.git
