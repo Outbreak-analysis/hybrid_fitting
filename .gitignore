@@ -22,6 +22,8 @@ commit.time
 
 local.mk
 
+data
+
 testdir/
 .testdir/
 subclone_dir/
