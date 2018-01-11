@@ -19,6 +19,8 @@ include sub.mk
 
 Sources += makestuff/ WA_Ebola_Outbreak/
 
+mdirs += WA_Ebola_Outbreak
+
 ##################################################################
 
 # Discussion
