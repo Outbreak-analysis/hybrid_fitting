@@ -2,6 +2,10 @@
 ## A probably-deprecated directory where I applied some of my hybrid stuff from the Ebola challenge to real Ebola data
 ## Still using at least for MMED slides
 
+## 2019 Aug 06 (Tue)
+## Resurrected after quite a while
+## Where's the alleged replacement?
+
 current: target
 target = Makefile
 -include target.mk
@@ -10,6 +14,7 @@ target: $(target)
 ##################################################################
 
 sierraLeone.hybrid.compare.Rout-3.pdf:
+sierraLeone.hybrid.compare.Rout.pdf:
 
 # make files
 
@@ -17,9 +22,11 @@ Sources = Makefile .ignore README.md sub.mk LICENSE.md
 include sub.mk
 -include $(ms)/perl.def
 
-Sources += makestuff/ WA_Ebola_Outbreak/
+Sources += makestuff/
 
-mdirs += WA_Ebola_Outbreak
+## Trying to resuscitate weird brokenness
+Ignore += WA_Ebola_Outbreak/
+pardirs += WA_Ebola_Outbreak
 
 ##################################################################
 
@@ -98,4 +105,3 @@ sierraLeone.hybridstan.Rout: sierraLeone.data.Rout sierraLeone.hybrid.params.Rou
 -include $(ms)/wrapR.mk
 -include $(ms)/modules.mk
 
-# -include $(ms)/oldlatex.mk
